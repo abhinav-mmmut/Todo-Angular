@@ -1,0 +1,29 @@
+<h1 class="text-center">
+    Todo List
+</h1>
+<app-add-todo (todoAdd)="todoAdd($event)"></app-add-todo>
+<div *ngIf="this.todos.length===0; else elseBlock"><h3 class="my-3">You do not have any Todos</h3></div>
+<ng-template #elseBlock>
+    <h3 class="my-3">Your Todos</h3>
+    <div *ngFor="let todo of todos; index as i">
+        <div class="my-3 card">
+            <div class="card-body">
+                
+                <div class="my-3">
+                    <h3 [ngClass]="{'strike': !todo.active}">
+                        {{todo.title}}
+                    </h3>
+                    <p [ngClass]="{'strike': !todo.active}">
+                        {{todo.desc}}
+                    </p>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck{{i}}" (click)="onCheckBoxClick(todo)" [checked]="!todo.active">
+                        <label class="form-check-label" for="exampleCheck{{i}}">Done</label>
+                      </div>
+                    <button class="btn btn-sm btn-danger" (click)="onClick(todo)">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+        
